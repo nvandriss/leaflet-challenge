@@ -13,7 +13,7 @@ async function main () {
       //Import GeoJSON data
       bgmap.addTo(map);
             d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_month.geojson").then(function(data) {
-      //Style
+      //Markers
         function styleInfo(feature) {
           return {
             opacity: 1,
@@ -74,7 +74,6 @@ async function main () {
       
       legend.onAdd = function() {
           const div = L.DomUtil.create("div", "info legend");
-      
           const grades = [-10, 10, 30, 50, 70, 90];
           const colors = [
         "#98ee00",
