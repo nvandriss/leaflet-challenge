@@ -25,7 +25,7 @@ async function main () {
             weight: 1
           };
         }
-      //Set Color
+      //Set Color - lower depth (green) -> greater depth (red)
         function getColor(depth) {
           switch (true) {
           case depth > 90:
@@ -68,11 +68,9 @@ async function main () {
           }
         }).addTo(map);
       //Legend
-        const legend = L.control({
-          position: "bottomright"
-        });
+        const legend = L.control({position: "bottomright"});
       
-      legend.onAdd = function() {
+      legend.onAdd = function(myMap) {
           const div = L.DomUtil.create("div", "info legend");
           const grades = [-10, 10, 30, 50, 70, 90];
           const colors = [
@@ -83,11 +81,14 @@ async function main () {
         "#e95d26",
         "#e92684"
           ];
-      
-          for (let i = 0; i < grades.length; i++) {
+          const legendInfo = "<h3>Earthquake Depth (km)</h3>" +
+            "<div class=\"labels\">" + "</div>";
+        div.innerHTML = legendInfo;
+
+        for (let i = 0; i < grades.length; i++) {
             div.innerHTML += "<i style='background: " + colors[i] + "'></i> "
             + grades[i] + (grades[i + 1] ? "&ndash;" + grades[i + 1] + "<br>" : "+");
-          }
+          };
           return div;
         };
       //Add Legend
